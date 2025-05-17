@@ -36,7 +36,7 @@ Byahe_Ni_Maria/
 
 1. Clone the repository:
 ```bash
-git clone [repository-url]
+git clone https://github.com/ColaGuevz/Byahe_Ni_Maria.git
 ```
 
 2. Open `index.html` in your web browser to view the website locally.
