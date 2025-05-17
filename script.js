@@ -75,3 +75,61 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('year').textContent = new Date().getFullYear();
 
 });
+
+// Initialize EmailJS
+(function() {
+    // Get your User ID (Public Key) from:
+    // 1. Go to https://www.emailjs.com/
+    // 2. Log in to your account
+    // 3. Go to Account > API Keys
+    // 4. Copy your Public Key
+    emailjs.init("90z3Dk_k7tzH9s1b0"); // Replace with your Public Key from EmailJS dashboard
+})();
+
+// Form handling
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoader = submitBtn.querySelector('.btn-loader');
+    const formStatus = document.getElementById('form-status');
+
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Show loading state
+        btnText.style.display = 'none';
+        btnLoader.style.display = 'inline-block';
+        contactForm.classList.add('form-submitting');
+
+        // Get form data
+        const formData = {
+            user_name: document.getElementById('user_name').value,
+            user_email: document.getElementById('user_email').value,
+            message: document.getElementById('message').value
+        };
+
+        // Send email using EmailJS
+        emailjs.send('service_r01yfpa', 'template_850pd9r', formData)
+            .then(function() {
+                // Show success message
+                formStatus.textContent = 'Thank you for your message! We will get back to you soon.';
+                formStatus.className = 'form-status success';
+                
+                // Reset form
+                contactForm.reset();
+            })
+            .catch(function(error) {
+                // Show error message
+                formStatus.textContent = 'Sorry, there was an error sending your message. Please try again later.';
+                formStatus.className = 'form-status error';
+                console.error('EmailJS error:', error);
+            })
+            .finally(function() {
+                // Reset button state
+                btnText.style.display = 'inline-block';
+                btnLoader.style.display = 'none';
+                contactForm.classList.remove('form-submitting');
+            });
+    });
+});
