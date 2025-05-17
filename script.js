@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Initialize EmailJS
+    emailjs.init("90z3Dk_k7tzH9s1b0");
+
     // Mobile Navigation Toggle
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -74,23 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update footer year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-});
-
-// Initialize EmailJS
-(function() {
-    // Get your User ID (Public Key) from:
-    // 1. Go to https://www.emailjs.com/
-    // 2. Log in to your account
-    // 3. Go to Account > API Keys
-    // 4. Copy your Public Key
-    emailjs.init("90z3Dk_k7tzH9s1b0"); // Replace with your Public Key from EmailJS dashboard
-})();
-
-// Form handling
-document.addEventListener('DOMContentLoaded', function() {
+    // Form handling
     const contactForm = document.getElementById('contact-form');
-    const submitBtn = document.getE
-    ementById('submit-btn');
+    const submitBtn = document.getElementById('submit-btn');
     const btnText = submitBtn.querySelector('.btn-text');
     const btnLoader = submitBtn.querySelector('.btn-loader');
     const formStatus = document.getElementById('form-status');
@@ -133,4 +122,5 @@ document.addEventListener('DOMContentLoaded', function() {
                 contactForm.classList.remove('form-submitting');
             });
     });
+
 });
