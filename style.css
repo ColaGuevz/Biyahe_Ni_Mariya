@@ -100,7 +100,7 @@ header .container {
 }
 
 .logo {
-    font-family: var(--script-font); /* Or your Byahe ni Maria font */
+    font-family: var(--script-font); /* Or your Byahe ni font */
     font-size: 1.8rem;
     color: var(--primary-color);
     font-weight: bold;
@@ -308,12 +308,12 @@ header .container {
 
 /* Testimonials Section */
 .testimonial-slider {
-    /* For a real slider, you'd use JS. This is a simple layout. */
     display: flex;
     gap: 30px;
     flex-wrap: wrap; /* Simple wrap for now */
     justify-content: center;
 }
+
 .testimonial {
     background: #fff;
     padding: 25px;
@@ -322,15 +322,18 @@ header .container {
     flex-basis: 45%; /* Two testimonials per row approx */
     min-width: 280px;
 }
+
 .testimonial p {
     font-style: italic;
     margin-bottom: 10px;
 }
+
 .testimonial h4 {
     font-weight: bold;
     color: var(--secondary-color);
     text-align: right;
 }
+
 .testimonial h4::after { display: none; }
 
 /* Contact Form */

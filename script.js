@@ -89,7 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // Form handling
 document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contact-form');
-    const submitBtn = document.getElementById('submit-btn');
+    const submitBtn = document.getE
+    ementById('submit-btn');
     const btnText = submitBtn.querySelector('.btn-text');
     const btnLoader = submitBtn.querySelector('.btn-loader');
     const formStatus = document.getElementById('form-status');
