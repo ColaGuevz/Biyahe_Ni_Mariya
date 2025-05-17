@@ -1,4 +1,4 @@
-# Byahe ni Maria - Authentic Philippine Adventures
+# Biyahe ni Mariya - Authentic Philippine Adventures
 
 A modern, responsive website for Byahe ni Maria, a personalized Philippine travel consultancy service that focuses on authentic cultural experiences and ethical tourism.
 
