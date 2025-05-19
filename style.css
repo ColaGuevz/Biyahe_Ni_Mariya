@@ -488,6 +488,22 @@ footer .container {
     }
 }
 
+@media (max-width: 600px) {
+    .container {
+        max-width: 100% !important;
+        padding: 0 8px !important;
+    }
+    img, .about-img, .destination-card img {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+    }
+    .about-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
 /* Contact Form Styles */
 .form-group {
     margin-bottom: 1.5rem;
