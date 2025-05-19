@@ -84,39 +84,60 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnLoader = submitBtn.querySelector('.btn-loader');
     const formStatus = document.getElementById('form-status');
 
+    // --- Rate Limiting ---
+    function canSubmitForm() {
+        const lastTime = localStorage.getItem('lastContactFormSubmit');
+        if (!lastTime) return true;
+        const now = Date.now();
+        return (now - parseInt(lastTime, 10)) > 60000; // 60 seconds
+    }
+    function setFormSubmittedNow() {
+        localStorage.setItem('lastContactFormSubmit', Date.now().toString());
+    }
+
+    // --- Modified Form Handling ---
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
+        // reCAPTCHA check
+        const recaptchaResponse = grecaptcha.getResponse();
+        if (!recaptchaResponse) {
+            formStatus.textContent = 'Please complete the reCAPTCHA challenge.';
+            formStatus.className = 'form-status error';
+            return;
+        }
+
+        // Rate limit check
+        if (!canSubmitForm()) {
+            formStatus.textContent = 'You can only send one message every 60 seconds. Please wait and try again.';
+            formStatus.className = 'form-status error';
+            return;
+        }
         // Show loading state
         btnText.style.display = 'none';
         btnLoader.style.display = 'inline-block';
         contactForm.classList.add('form-submitting');
-
         // Get form data
         const formData = {
             user_name: document.getElementById('user_name').value,
             user_email: document.getElementById('user_email').value,
             message: document.getElementById('message').value
         };
-
         // Send email using EmailJS
         emailjs.send('service_r01yfpa', 'template_850pd9r', formData)
             .then(function() {
-                // Show success message
                 formStatus.textContent = 'Thank you for your message! We will get back to you soon.';
                 formStatus.className = 'form-status success';
-                
-                // Reset form
                 contactForm.reset();
+                setFormSubmittedNow();
+                grecaptcha.reset(); // Reset reCAPTCHA for next submission
             })
             .catch(function(error) {
-                // Show error message
                 formStatus.textContent = 'Sorry, there was an error sending your message. Please try again later.';
                 formStatus.className = 'form-status error';
                 console.error('EmailJS error:', error);
             })
             .finally(function() {
-                // Reset button state
                 btnText.style.display = 'inline-block';
                 btnLoader.style.display = 'none';
                 contactForm.classList.remove('form-submitting');

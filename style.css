@@ -5,7 +5,7 @@
     --neutral-bg: #f9f6f2; /* Off-white/Light Beige */
     --text-color: #4A4A4A; /* Dark Grey */
     --heading-font: 'Montserrat', sans-serif;
-    --body-font: 'Open Sans', sans-serif;
+    --body-font: 'Open Sans', sans-serif    ;
     --script-font: 'Satisfy', cursive; /* For special accents like the logo maybe */
     --nav-height: 70px;
 }
